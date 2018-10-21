@@ -1,0 +1,102 @@
+課題3_2
+実行結果(作成されたVSMコード)
+0 ISP 2
+1 LC 2
+2 SB 1
+3 CALL 5
+4 EXIT
+5 ISP 5
+6 LV 0 0
+7 DUP
+8 PUTI
+9 ISP -1
+10 LV 0 1
+11 DUP
+12 PUTI
+13 ISP -1
+14 LV 1 3
+15 DUP
+16 PUTI
+17 ISP -1
+18 LV 1 4
+19 DUP
+20 PUTI
+21 ISP -1
+22 LC 10
+23 DUP
+24 PUTC
+25 ISP -1
+26 RET
+
+正しくコンパイルが行われていることを確認できた
+
+課題3_3
+user@user-THINK /cygdrive/c/Compirer
+$ make mcc
+gcc -g -c mcc.c
+gcc -g mcc.o lex.o tab.o code.o -o mcc
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./mcc test33.mc
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm test33.vsm
+7
+4
+11
+28
+正しく出力されていることを確認できた
+
+課題3_4
+user@user-THINK /cygdrive/c/Compirer
+$ ./mcc if.mc
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm if.vsm
+?1999
+55
+55
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm if.vsm
+?2001
+33
+33
+正しく出力するしていることを確認できた
+
+課題3_5
+user@user-THINK /cygdrive/c/Compirer
+$ ./mcc test35.mc
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm test35.vsm
+11
+正しく出力されていることを確認できた
+
+課題3_6
+user@user-THINK /cygdrive/c/Compirer
+$ ./mcc sum.mc
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm sum.vsm
+n=10
+s=55
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./mcc factor.mc
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm factor.vsm
+n=1000
+2 2 2 5 5 5
+正しい結果が得られたことが確認できた
+
+[全体の感想]
+今回は文についての様々なパターンの解析が行えるように
+parse_statement(c, x, gt, lt)
+の中の機能を拡張していく課題を行った。
+苦労した点は、tokenをどのタイミングで次のtokenに移す
+かを様々な関数が遷移しあっている中で考えることであっ
+た。また今回の課題ではVSMコードについてしっかり理解し
+ておかないとただしいVSMコードを考えるのに苦労するため
+次のstageの課題までに復習を行っておこうと思った。

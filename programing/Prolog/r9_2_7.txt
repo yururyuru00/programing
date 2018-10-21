@@ -1,0 +1,41 @@
+male(tom).
+male(bob).
+male(jim).
+female(liz).
+female(ann).
+
+gather_men(L) :- setof(X, male(X), L).
+number_of_men(N) :- gather_men(L), counter(L, N).
+counter([_|L1], N) :- counter(L1, N1), N is N1+1.
+counter([], 0).
+
+female(X) :- not(male(X)).
+
+(i)
+?- female(pam).
+false
+prologではDBにない節に関しては、分からないではなく"false"
+つまり偽
+として返すという事が分かった。
+
+(ii)
+?- female(pam).
+true.  ---(1)
+
+?- female(jim).
+false.  ---(2)
+
+この事から分かったこととして、DBに記述されている範囲内については
+述語に書いてある通りに判断を行い、DBに書いていないことに関し
+ては、"DBにないので分からない"ではなく"false"として判断され
+るという事が分かった。
+
+具体的には(1)では
+female(pam) :- not(male(pam)).
+と単一化を行い、male(pam)というDBがそもそもないため中身がfal
+seになりnot(false)によりtrue
+
+(2)では
+female(jim) :- not(male(jim))となり
+male(jim)に関してはDBにあるため"true"を返す。
+not(true)によりfalseを返し、正しく機能している

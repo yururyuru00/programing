@@ -1,0 +1,50 @@
+type = ID         token = "a"
+type = ID         token = "b"
+type = ID         token = "c"
+type = ID         token = "abc"
+type = ID         token = "ABC"
+type = ID         token = "main"
+type = ID         token = "x123"
+type = ID         token = "p000Ax3"
+type = KW_CHAR    token = "char"
+type = KW_ELSE    token = "else"
+type = KW_IF      token = "if"
+type = KW_INT     token = "int"
+type = KW_RETURN  token = "return"
+type = KW_WHILE   token = "while"
+type = ID         token = "_program"
+type = ID         token = "u_p0x_A0x_774"
+type = INT        token = "1"  val = 1
+type = INT        token = "2"  val = 2
+type = INT        token = "12"  val = 12
+type = INT        token = "123"  val = 123
+type = INT        token = "0123456"  val = 123456
+type = INT        token = "00123456789"  val = 123456789
+type = CHAR       token = "'a'"  val = 97
+type = CHAR       token = "'b'"  val = 98
+type = CHAR       token = "'0'"  val = 48
+type = CHAR       token = "'\t'"  val = 9
+type = CHAR       token = "'\n'"  val = 10
+type = CHAR       token = "'\''"  val = 39
+type = CHAR       token = "'\\'"  val = 92
+type = SEMICOLON  token = ";"
+type = COMMA      token = ","
+type = LPAR       token = "("
+type = RPAR       token = ")"
+type = LBRACE     token = "{"
+type = RBRACE     token = "}"
+type = LBRACK     token = "["
+type = RBRACK     token = "]"
+type = MINUS      token = "-"
+type = PLUS       token = "+"
+type = STAR       token = "*"
+type = SLASH      token = "/"
+type = PERC       token = "%"
+type = AMP        token = "&"
+type = ASSIGN     token = "="
+type = EQ         token = "=="
+type = NE         token = "!="
+type = GT         token = ">"
+type = GE         token = ">="
+type = LT         token = "<"
+type = LE         token = "<="

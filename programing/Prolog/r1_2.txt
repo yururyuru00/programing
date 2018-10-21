@@ -1,0 +1,72 @@
+grandfather(X, Y) :- parent(Z, Y), parent(X, Z), male(X).
+
+論理的意味はZがYの親であり、かつXがそのZの親であり、かつ
+そのXが男性ならXはYの祖父であるという意味
+
+実際にデバッグしてみると
+[trace]  ?-
+|
+|    grandfather(X, Y).
+   Call: (8) grandfather(_3872, _3874) ? creep
+   Call: (9) parent(_4126, _3874) ? creep
+   Exit: (9) parent(pam, bob) ? creep
+   Call: (9) parent(_3872, pam) ? creep
+   Fail: (9) parent(_3872, pam) ? creep
+   祖父探し再開
+   Redo: (9) parent(_4126, _3874) ? creep
+   Exit: (9) parent(tom, bob) ? creep
+   Call: (9) parent(_3872, tom) ? creep
+   Fail: (9) parent(_3872, tom) ? creep
+   祖父探し再開
+   Redo: (9) parent(_4126, _3874) ? creep
+   Exit: (9) parent(bob, pat) ? creep
+   Call: (9) parent(_3872, bob) ? creep
+   Exit: (9) parent(pam, bob) ? creep
+   Call: (9) male(pam) ? creep
+   Fail: (9) male(pam) ? creep
+   祖父探し再開
+   Redo: (9) parent(_3872, bob) ? creep
+  Exit: (9) parent(tom, bob) ? creep
+  Call: (9) male(tom) ? creep
+  Exit: (9) male(tom) ? creep
+  Exit: (8) grandfather(tom, pat) ? creep
+X = tom,
+Y = pat
+
+二つある解のうち一つ目の動作は以上のようになった
+3874や3872という数字の意味が初めは全く分からなかったが
+そもそも意味はなく、探すものが分からないため未知数を設定している
+つまりたんなるx,yのようなものだと仮定すると上のやっていることが
+分かるようになってきた
+
+grandfather(X, Y)であるためにはparent(Z, Y),parent(X, Z),male(X)
+でなければならないため、まずparent(Z, Y)をみたすDBのなかから一番上にある
+parent(pam, bob)を単一化する。
+次にparent(X, Z)の条件を満たすべくZ=pam, Y=bobを代入し
+parent(X, pam)を満たすDBを探す。
+DBにないため祖父探し失敗　---Fail: (9) parent(_3872, pam) ? creep
+
+やり直し(Redo)をし、今度はparent(Z, Y)を満たすDBの中から二番目上にある
+parent(tom, bob)を単一化する。
+次にparent(X, Z)の条件を満たすべくZ=tom, Y=bobを代入し
+parent(X, tom)を満たすDBを探す
+これもないため祖父探し失敗 ---Fail: (9) parent(_3872, tom) ? creep
+
+Redoをし、今度はparent(Z, Y)を満たすDBの中から3番目上にある
+parent(bob, pat)を単一化する
+次にparent(X, Z)の条件を満たすべくZ=bob, Y=patを代入し
+parent(X, bob)を満たすDBを探す。
+今度は見つかる→二種類あるためまず上のparent(pam, bob)をparent(X, Z)と
+単一化する
+最後の条件male(pam)は正しくないため祖父探し失敗
+
+Redoをするが、最初からRedoをするのではなく途中のparent(X, Z)探しから
+Redoする。parent(X, bob)を満たす二種類のDBの内、二番目を今度は単一化
+→parent(tom, bob)
+最後の条件male(tom)もDBに存在するためすべての要件を満たし
+grandfather(tom, pat)が正しいといえるためこれを出力する
+
+二つ目の解も同様に探す
+
+以上のようにプログラムの中では上から逐次探索のようなイメージで
+抜けがないよう単一化や問いかけを行っていることが分かった

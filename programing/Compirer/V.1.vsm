@@ -1,0 +1,13 @@
+0: LC 1
+1: LC 2
+2: ADD
+3: LC 3
+4: LC 18
+5: LC 4
+6: LC 9
+7: ADD
+8: DIV
+9: SUB
+10: MUL
+15: PUTI
+11: EXIT

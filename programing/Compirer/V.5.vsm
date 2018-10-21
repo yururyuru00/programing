@@ -1,0 +1,78 @@
+0: ISP 1
+1: LC 1
+2: SB 1
+3: CALL 5
+4: EXIT
+
+5: ISP 5
+6: LA 0 0
+7: LC 7
+8: SI
+9: LA 1 3
+10: LC 27
+11: SI
+
+12: LA 1 4
+13: ISP 3
+14: LV 1 3
+15: ISP -4
+16: CALL 41
+17: SI
+18: LV 1 4
+19: PUTI
+20: LC 10
+21: PUTC
+
+22: LA 1 3
+23: LV 1 3
+24: LC 2
+25: MUL
+26: SI
+
+27: LA 1 4
+
+28: ISP 3
+29: LV 1 3
+30: ISP -4
+31: CALL 41
+32: SI
+33: LV 1 4
+34: PUTI
+35: LC 10
+36: PUTC
+
+37: LA 1 0
+38: LC 0
+39: SI
+40: RET
+
+41: ISP 6
+42: LA 1 4
+43: LV 1 3
+44: LC 10
+45: MOD
+46: SI
+47: LV 1 4
+48: LV 0 0
+49: LT
+
+50: BZ 6
+51: LA 1 5
+52: LV 1 3
+53: LV 1 4
+54: SUB
+55: SI
+
+56: B 7
+57: LA 1 5
+58: LV 1 3
+59: LV 1 4
+60: SUB
+61: LC 10
+62: ADD
+63: SI
+
+64: LA 1 0
+65: LV 1 5
+66: SI
+67: RET

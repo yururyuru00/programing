@@ -1,0 +1,19 @@
+has_duplication([L|L1]) :- member(L, L1).
+has_duplication([_|L1]) :- has_duplication(L1).
+
+(i)
+リストLのヘッドが残りのボディー部分と一つでもかぶっていたら
+member関数によりtrueが返り、そうでなかったら二行目と単一化
+を行い、リストLのサイズを一つ下げて再帰を行う
+リストの中身がから集合になるまでに一回でも上のルール節と単一化
+したらtrueが返るため再帰した分bottomupでtrueを返すが、一回も
+上のルール節を単一化しない、つまり一度もかぶらなかったときは,
+trueを返すことがないまま再帰を繰り返し行き詰るためfalse
+
+(ii)has_duplication([a, b, a])
+リストLのヘッド'a'についていきなり残りのボディー[b, a]と被るため
+member関数はtrueを返す
+has_duplication([a|b, a]) :- member(a, [b, a]).
+membre(a, [b, a])はtrueを返すため
+has_duplication([a|b, a]) :- true
+より再帰は行われずに答えはtrueを返す

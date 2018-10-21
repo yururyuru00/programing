@@ -1,0 +1,10 @@
+
+
+
+a b c abc ABC main x123 p000Ax3
+char else if int return while
+_program u_p0x_A0x_774
+1 2 12 123 0123456 00123456789
+'a' 'b' '0' '\t' '\n' '\'' '\\'
+;, () {} []
+-+*/%&= == != > >= < <=

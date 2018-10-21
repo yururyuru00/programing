@@ -1,0 +1,60 @@
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm test22.vsm
+1997+5628
+
+正しく数字と文字列が認識され出力された
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm test24.vsm
+5
+3
+
+正しく+-の計算ができていることが確認できた
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm test25.vsm
+6
+3
+2
+4
+7
+
+*/%が計算で来ていて、+-との計算の優先速度が
+反映されていた
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm test26.vsm
+0
+1
+1
+
+比較演算ができていることが確認できた
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm test27.vsm
+10
+2
+3
+
+かっこの中身の演算が先に行われていることが
+確認できた
+
+user@user-THINK /cygdrive/c/Compirer
+$ ./vsm test28.vsm
+d
+d
+2
+2
+3
+9
+9
+7
+
+正しく標準入力を受け取り、計算も行われている
+事が分かった
+
+全体の感想
+stage2に関しては主に関数(putintやputchar,各演算)をスタックに
+正しい順番で積むように、parse_expression1~5の順番を正しく行う
+事が特に大切だと感じた。この順番を正しく把握するためには、各演算の
+一般系をしっかり理解する必要があることもわかった

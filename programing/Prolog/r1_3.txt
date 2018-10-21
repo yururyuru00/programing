@@ -1,0 +1,55 @@
+ancestor(X, Y) :- parent(X, Y).　---条件１
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).　---条件２
+
+論理的意味はXがYの親であるか、もしくは
+XがZの親でかつ、そのZがYの祖先（再帰）ならXがYの祖先であるという意味
+
+デバッグしてみると
+[trace]  ?- ancestor(X, jim).
+   Call: (8) ancestor(_5364, jim) ? creep
+   Call: (9) parent(_5364, jim) ? creep
+   Exit: (9) parent(pat, jim) ? creep
+   Exit: (8) ancestor(pat, jim) ? creep
+X = pat
+
+一人目は条件１のjimの親であるpatを祖先として出力
+
+Redo: (8) ancestor(_5364, jim) ? creep
+  Call: (9) parent(_5364, _5586) ? creep
+  Exit: (9) parent(pam, bob) ? creep
+  Call: (9) ancestor(bob, jim) ? creep　再帰１
+  Call: (10) parent(bob, jim) ? creep
+  Fail: (10) parent(bob, jim) ? creep
+  Redo: (9) ancestor(bob, jim) ? creep
+  Call: (10) parent(bob, _5586) ? creep
+  Exit: (10) parent(bob, pat) ? creep
+  Call: (10) ancestor(pat, jim) ? creep　再帰２
+  Call: (11) parent(pat, jim) ? creep
+  Exit: (11) parent(pat, jim) ? creep
+  Exit: (10) ancestor(pat, jim) ? creep
+  Exit: (9) ancestor(bob, jim) ? creep
+  Exit: (8) ancestor(pam, jim) ? creep
+X = pam
+
+二人目のpamでは再帰処理が2回も行われている
+まず条件２のparent(X, Z)から始め、単一化できるparentのDB群から
+一番上のparent(pam, bob)を単一化
+次に条件２の二つ目の条件ancestor(Z, Y)　（これが再帰１）処理
+ancestor(bob, jim)であることを言えればいいため、このことが正しいかどうか
+を見るために再び条件２の左辺にancestor(bob, jim)を代入
+
+ancestor(bob, jim)といえるためには条件１のparent(bob, jim)と言えればいいが
+DBにはないため条件２の再帰処理を再び行う
+ancestor(bob, jim)というためにはparent(bob, Z)をまず満たさなければならないため
+それを満たすものをDBから探す
+唯一あるparent(bob, pat)を単一化し、さらに二つ目の条件ancestor(Z, Y)に代入して
+ancestor(pat, jim)が正しいかどうかを調べる　←再帰処理２
+
+ancestor(pat, jim)は条件１ parent(pat, jim)を満たすため正しいといえる
+
+よってancestor(pat, jim)が正しい
+↓
+ancestor(bob, jim)が正しい
+↓
+ancestor(pam, jim)が正しい
+というように末端から、求めたかった解に戻るような形で真が移る

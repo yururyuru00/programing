@@ -1,0 +1,95 @@
+課題4_1
+実行結果>>>
+
+user@user-THINK /cygdrive/c/programing/Compirer
+$ ./mcc test41.mc
+
+user@user-THINK /cygdrive/c/programing/Compirer
+$ ./vsm test41.vsm
+5
+4
+3
+2
+1
+
+正しい結果が出力されていることを確認できた
+
+課題4_2
+実行結果>>>
+
+user@user-THINK /cygdrive/c/programing/Compirer
+$ ./mcc fact.mc
+
+user@user-THINK /cygdrive/c/programing/Compirer
+$ ./vsm fact.vsm
+n=5
+5!=120
+
+user@user-THINK /cygdrive/c/programing/Compirer
+$ ./mcc gcd.mc
+
+user@user-THINK /cygdrive/c/programing/Compirer
+$ ./vsm gcd.vsm
+n=12
+m=16
+g=4
+n=
+
+正しい結果が出力されていることを確認できた
+
+課題4_3
+
+user@user-THINK /cygdrive/c/programing/Compirer
+$ ./mcc pointer.mc
+
+user@user-THINK /cygdrive/c/programing/Compirer
+$ ./vsm pointer.vsm
+1234 1236 2000
+
+正しい結果が出力されていることを確認できた
+
+課題4_4
+user@user-THINK /cygdrive/c/programing/Compirer
+$ ./mcc matrix.mc
+
+user@user-THINK /cygdrive/c/programing/Compirer
+$ ./vsm matrix.vsm
+ 2 4 1
+ 3 2 5
+
+ 2 4 1 5
+ 1 9 3 0
+ 3 1 7 3
+
+ 11 45 21 13
+ 23 35 44 30
+
+ user@user-THINK /cygdrive/c/programing/Compirer
+ $ ./mcc ssort.mc
+
+ user@user-THINK /cygdrive/c/programing/Compirer
+ $ ./vsm ssort.vsm
+  8 1 4 7 2 4 5 6
+  1 2 4 4 5 6 7 8
+
+正しい結果が出力されていることが確認できた
+
+[全体の感想]
+今回の課題で特に苦戦したところは4_4の配列の処理に関するもので
+様々な関数を行き来する中でのtokenの切り出しのタイミングや変数
+の受け渡しなどももちろんのことながら、単純にやっていること一つ
+一つを理解することが難しく、それまで使っていなかったitabとatab
+の違い、関係性などもほかのコードを見ながら見直す必要があった。
+
+今回の課題を終わらせて思ったことは、エラーが出ることのありがたさ
+であった。プロ１ではエラーを消すことに格闘していたのに、今では
+実行ができる状態になってからの、自分の、出題者の意図した実行が出
+来ているのかを調べる、という事からが本番という事を思い知らされた。
+
+またこのように関数をたくさん用意しそれぞれで役割分担、作業結
+果の受け渡しをするような状況では、後半にやり始めたのだが関数
+間の処理の流れを枝分かれの様にノートにメモを書いていき、それぞ
+れがどのように影響を及ぼしあっているのかを、面倒くさがらずに行
+うという作業が非常に大切だと分かった。プロ１のときに言われた、
+頭の中で完結せずに考えの流れを紙に書き起こしなさい、という教え
+に非常に助けられた。

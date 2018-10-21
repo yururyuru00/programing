@@ -1,0 +1,28 @@
+rem3(0, 0).
+rem3(1, 1).
+rem3(2, 2).
+rem3(X, Z) :- X1 is X-3, rem3(X1, Z).
+
+(i) プログラムの論理的意味
+rem3(X, Z)のZの値は、rem(X-3, Z)のZと同じ値である
+
+(ii)　実行時の動作
+[trace]  ?- rem3(5, Y).
+   Call: (8) rem3(5, _1948) ? creep
+  　　rem3(5, Y)と同じ形の述語を探す
+   Call: (9) _2170 is 5+ -3 ? creep
+      rem3(X, Z) :- X1 is X-3, rem3(X1, Z).　のX1 is X-3の実行
+   Exit: (9) 2 is 5+ -3 ? creep
+      5-3の計算結果をX1に代入
+   Call: (9) rem3(2, _1948) ? creep
+      rem3(X, Z) :- X1 is X-3, rem3(X1, Z).　のrem3(X1, Z)の実行　←　再帰処理
+      X1は先ほどの計算より2とわかっているので具体的にはrem3(2, Y)となる
+   Exit: (9) rem3(2, 2) ? creep
+      rem3(2, Y)を呼び出し、データベースにrem(2, 2)という単一化できるものがある
+      ため単一化する
+   Exit: (8) rem3(5, 2) ? creep
+      解として出すYの値が分かったためY=2として出力
+Y = 2 .
+
+(iii)
+正しくできた

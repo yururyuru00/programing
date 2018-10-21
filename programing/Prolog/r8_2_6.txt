@@ -1,0 +1,30 @@
+fruit(banana).
+fruit(apple).
+fruit(grape).　
+
+contained([L|L1]) :- fruit(L), contained(L1).　ルール節
+contained([]).　事実節
+
+t1 :- contained([apple, banana]).
+t2:- contained([orange]).
+
+(i)
+与えられたリストがDBに含まれているならば、リストの先頭かつ、残りのリスト
+のボディー部分はDBに含まれている ---　ルール節
+空集合はDBに含まれている --- 事実節
+
+(ii)contained([apple, banana])
+ルール節と単一化し、リストのヘッドappleについてfruit(apple)という
+述語節があるか調べる
+あったのでEXITして、次にappleの分サイズを減らしたリスト[banana]に
+ついて再帰処理を行う。
+
+ルール節と単一化し、リストのヘッドbananaについてfruit(banana)という
+述語節があるか調べる
+あったのでEXITして、次にbananaの分サイズを減らしたリスト[]にについて
+再帰処理を行う
+
+引数が空リストなので事実節と単一化しtrueを返す
+
+あとは再帰した分、trueがbottom(contained([]))からcontained([
+apple, banana])までupしていくため答えとしてはtrueを返す

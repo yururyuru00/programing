@@ -1,0 +1,35 @@
+ok :- father(tom, bob).
+
+上記の論理的意味はtomがbobの父親であるならば正しいという意味のokを
+出力するという意味
+
+実行したときの動作は
+?- ok.
+true
+
+具体的にデバッグしてみると
+[trace]  ?- ok.
+   Call: (8) ok ? creep
+   Call: (9) father(tom, bob) ? creep
+   Call: (10) parent(tom, bob) ? creep
+   Exit: (10) parent(tom, bob) ? creep
+   Call: (10) male(tom) ? creep
+   Exit: (10) male(tom) ? creep
+   Exit: (9) father(tom, bob) ? creep
+   Exit: (8) ok ? creep
+true .
+
+↑流れとしては
+まず初めにokという述語をもつ規則を探し
+ok :- father(tom, bob).を見つける   ---call(8~9)
+
+okという出力をするためにはfather(tom, bob)でなければならず
+DBにはないためまた規則father(X, Y) :- parent(X, Y), male(X).
+をみつけるためfather(tom, bob)というためには、parent(tom, bob)
+かつmale(tom)と言わなければならない --- call(9)
+
+parent(tom, bob)
+かつmale(tom)はDBに実際に記載されているため正しい --- call(10) exit(10)
+
+よってfather(tom, bob)も正しいといえる
+よってokといえるため出力する --- exit(9~8)

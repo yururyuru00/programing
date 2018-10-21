@@ -1,0 +1,293 @@
+科目名: コンパイラ実習
+課題: R4
+番号: 6689
+氏名: 矢嶋　悠太
+作成: 2018年10月7日
+
+----------------------------------------
+
+[課題 4.1]
+
+[実行結果]
+user@user-THINK /cygdrive/c/programing/Compirer_training
+$ ./a
+Skyline  3  5.51471  58000
+Civic  5  5.53488  39500
+Prius 5 8.89655 0
+
+----------------------------------------
+
+[課題4.2]
+
+[実行結果]
+user@user-THINK /cygdrive/c/programing/Compirer_training
+$ ./a
+Skyline  3  5.51471  58000
+Civic  5  5.53488  39500
+Prius 5 8.89655 17250
+
+メソッドのオーバーライドを行い無事に自動車税が変わっている
+
+
+----------------------------------------
+
+[課題4.3]
+
+[実行結果]
+user@user-THINK /cygdrive/c/programing/Compirer_training
+$ ./a
+car(md, mk, dp, p, w)　---①
+car(md, mk, dp, p, w)  ---②
+
+car(md, mk, dp, p, w)  ---③
+hybrid_car(md, mk, dp, p, w, mps) ---③
+
+car()  ---④
+hybrid_car()  ---④
+
+Skyline  3  5.51471  58000
+Civic  5  5.53488  39500
+Prius 5 8.89655 17250
+
+~hybrid_car()  ---⑤
+~car()  ---⑤
+
+~hybrid_car()　---⑥
+~car()  ---⑥
+
+~car()　---⑦
+~car()　---⑧
+
+③のように継承先のサブクラスのオブジェクトが作られたときに
+先に指定しておいたスーパークラスのコンストラクタが呼び出さ
+れた後にサブクラスのコンストラクタが呼び出されていることを
+確認できた
+④のように、コンストラクタが指定されていなかった時もスーパ
+ークラスのデフォルトコンストラクタが呼び出された後にサブク
+ラスのコンストラクタが呼び出されたことが分かった
+
+⑤⑥のようにデストラクタはコンストラクタが呼び出された時と
+は逆に子クラス→親クラスの順に呼び出されていることが分かっ
+た
+
+
+----------------------------------------
+
+[課題4.4]
+
+[main関数]
+int main(void) {
+  stack_ac s1 = stack_ac(10);
+  stack_ac s2 = stack_ac(10);
+
+  s1.push(4); s1.push(3); s1.push(65);
+  s1.push(2); s1.pop(); s1.pop();
+
+  s2.push(2); s2.push(1); s2.pop();
+  s2.push(11);  s2.pop(); s2.pop();
+
+  s1.dump(std::cout);
+  std::cout << "push_coounter :" << s1.n_push() << std::endl;
+  std::cout << "pop_coounter :" << s1.n_pop() << std::endl;
+
+  std::cout << std::endl;
+
+  s2.dump(std::cout);
+  std::cout << "push_coounter :" << s2.n_push() << std::endl;
+  std::cout << "pop_coounter :" << s2.n_pop() << std::endl;
+}
+
+
+[実行結果]
+user@user-THINK /cygdrive/c/programing/Compirer_training
+$ ./a
+max=10, sp=2, data=(4 3 )
+push_coounter :4
+pop_coounter :2
+
+max=10, sp=0, data=()
+push_coounter :3
+pop_coounter :3
+
+
+----------------------------------------
+
+[課題4.5]
+
+[実行結果]
+user@user-THINK /cygdrive/c/programing/Compirer_training
+$ ./a
++--------------------+
+|  X              X  |
+| XXX   XXXXXX       |
+|XXXXX  XXXXXX  X    |
+| XXX          XXX   |
+|  X          XXXXX  |
+|            XXXXXXX |
+|           XXXXXXXXX|
+|  XXX       XXXXXXXX|
+|  XXX        XXXXX  |
+|X             XXX   |
++--------------------+
++--------------------+
+|    XXXXX  XXXXXX  X|
+|     XXX          XX|
+|      X          XXX|
+|                XXXX|
+|               XXXXX|
+|      XXX       XXXX|
+|      XXX        XXX|
+|    X             XX|
+|                   X|
+|                    |
++--------------------+
+
+
+
+----------------------------------------
+
+[課題4.6]
+
+[実行結果]
+user@user-THINK /cygdrive/c/programing/Compirer_training
+$ ./a
++--------------------+
+|  X              X  |
+| XXX   XXXXXX       |
+|XXXXX  XXXXXX  X    |
+| XXX          XXX   |
+|  X          XXXXX  |
+|            XXXXXXX |
+|           XXXXXXXXX|
+|  XXX       XXXXXXXX|
+|  XXX        XXXXX  |
+|X             XXX   |
++--------------------+
++--------------------+
+|    XXXXX  XXXXXX  X|
+|     XXX          XX|
+|      X          XXX|
+|                XXXX|
+|               XXXXX|
+|      XXX       XXXX|
+|      XXX        XXX|
+|    X             XX|
+|                   X|
+|                    |
++--------------------+
+
+
+
+----------------------------------------
+
+[課題4.7]
+
+[コンパイル結果]
+user@user-THINK /cygdrive/c/programing/Compirer_training
+$ g++ r4_7.cpp
+/tmp/ccCO8lSO.o:r4_7.cpp:(.text+0x9ff): `obj::draw(canvas&)
+' に対する定義されていない参照です
+/tmp/ccCO8lSO.o:r4_7.cpp:(.text+0x9ff): 再配置がオーバーフ
+ローしないように切り詰められました: R_X86_64_PC32 (未定義シ
+ンボル `obj::draw(canvas&)' に対して)
+/tmp/ccCO8lSO.o:r4_7.cpp:(.text+0xab9): `obj::draw(canvas&
+)' に対する定義されていない参照です
+/tmp/ccCO8lSO.o:r4_7.cpp:(.text+0xab9): 再配置がオーバーフ
+ローしないように切り詰められました: R_X86_64_PC32 (未定義シ
+ンボル `obj::draw(canvas&)' に対して)
+collect2: エラー: ld はステータス 1 で終了しました
+
+コンパイルのエラーから分かるように
+vec[i]->draw(c);
+でvec[i]に格納されているオブジェクト先のメソッドを実行しよ
+うとしているが、仮想関数を実装していないため親クラスを継承
+している三種類のオブジェクトのどのオブジェクトを参照すれば
+いいかを動的にできず、親クラスのオブジェクトを呼び出し、そ
+のクラスにはないdraw関数を呼び出そうとしているためエラーが
+起きていることが分かった
+
+----------------------------------------
+
+[課題4.8]
+
+[実行結果]
+user@user-THINK /cygdrive/c/programing/Compirer_training
+$ ./a
++--------------------+
+|  X              X  |
+| XXX   XXXXXX       |
+|XXXXX  XXXXXX  X    |
+| XXX          XXX   |
+|  X          XXXXX  |
+|            XXXXXXX |
+|           XXXXXXXXX|
+|  XXX       XXXXXXXX|
+|  XXX        XXXXX  |
+|X             XXX   |
++--------------------+
++--------------------+
+|    XXXXX  XXXXXX  X|
+|     XXX          XX|
+|      X          XXX|
+|                XXXX|
+|               XXXXX|
+|      XXX       XXXX|
+|      XXX        XXX|
+|    X             XX|
+|                   X|
+|                    |
++--------------------+
+
+正しく実行されていることが確認できた
+
+
+----------------------------------------
+
+[課題4.9]
+
+user@user-THINK /cygdrive/c/programing/Compirer_training
+$ ./a
++--------------------+
+|  X              X  |
+| XXX   XXXXXX       |
+|XXXXX  XXXXXX  X    |
+| XXX          XXX   |
+|  X          XXXXX  |
+|            XXXXXXX |
+|           XXXXXXXXX|
+|  XXX       XXXXXXXX|
+|  XXX        XXXXX  |
+|X             XXX   |
++--------------------+
++--------------------+
+|    XXXXX  XXXXXX  X|
+|     XXX          XX|
+|      X          XXX|
+|                XXXX|
+|               XXXXX|
+|      XXX       XXXX|
+|      XXX        XXX|
+|    X             XX|
+|                   X|
+|                    |
++--------------------+
+
+
+----------------------------------------
+[R4全体の感想]
+継承という概念はプログラミング実習ⅡのJAVAの時にも構文は
+細かいところでは違えど習っていたためなじみが深かったが、c
+言語特有のポインタなどの考え方と交えて考えると難しいこと
+も多かった。1,2回生のころはコードの長さや可読性などは意識せ
+ずうまく動作すればいいという考えだったが、JAVAやc++などの
+オブジェクト指向で今まで作って来たプログラムをクラスとして
+使い回し、たくさんの人と分担しながら大きなプロジェクトの下
+の海藻から構成していく考え方に触れあっていく内に、分かりや
+すい、まとまったコードを書くことの大切さを感じた。
+このR2~R4までで習ったことをさらに復習しまとまった考え方で
+コーディングができるように勉強したい
+
+
+
+
+

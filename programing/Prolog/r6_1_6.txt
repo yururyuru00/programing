@@ -1,0 +1,37 @@
+isTerm(g(X, Y)) :- isTerm(X), isTerm(Y). ルール節⓵
+isTerm(f(X)) :- isTerm(X).　ルール節⓶
+isTerm(X) :- alphabet(X).　ルール節⓷
+isTerm(X) :- digit(X).　ルール節⓸
+alphabet(a).　事実節⓹
+alphabet(b).　事実節⓺
+digit(0).　事実節⓻
+digit(1).　事実節⓼
+
+(i)論理的意味
+g(X, Y)が項になるためにはX, Yが共に項でなければならない
+f(X)が項になるためにはXが項でなければならない
+Xが項であるためにはXがalphabetかdigitでなければならない
+以下は述語記号alphabet, digitの事実節
+要はalphabet、digitの具体的な例
+
+(ii)実行したときの動作
+⓵よりg(0, f(b))の第一引数0, 第二引数f(b)に分け、それぞれが項かどうかを
+検査する
+まず第一引数0について
+0にはf(), g()がついていないアトムなので⓷と単一化する
+→ isTerm(0) :- alphabet(0)
+alphabet(0)はDBに一つも記述されていないためFail
+Redoしてアトム０について今度は⓸と単一化する
+→ isTerm(0) :- digit(0)
+DBにあるためtrue　→　第一引数0は項と分かった
+
+次に第二引数f(b)について調べる
+f()の形なのでまず⓶と単一化し、()をはずす
+isTerm(b)について⓷と単一化しalphabet(b)について調べる
+DBにあるためtrue
+
+よって第一引数、第二引数共にtrueのため
+isTerm(g(0, f(b))):- true, true
+よってisTerm(g(0, f(b)))はtrue
+
+(iii)正しく実行できた

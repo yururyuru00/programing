@@ -1,0 +1,8 @@
+has_duplication([L|L1]) :- member(L, L1).
+has_duplication([_|L1]) :- has_duplication(L1).
+
+(i)
+与えられたリストの先頭リストがその先頭文字が後に含まれる
+かどうか検査しあれば再帰をやめ、なければ再帰を続ける
+
+(ii)

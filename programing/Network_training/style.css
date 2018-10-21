@@ -1,0 +1,17 @@
+#site-box {    }
+
+#a-box {    }
+
+#b-box {
+          float: left;
+          background: pink;
+          width: 50%;
+}
+
+#c-box {
+          float: right;
+          background: blue;
+          width: 50%;
+}
+
+#d-box {    }

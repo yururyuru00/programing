@@ -1,0 +1,26 @@
+0: ISP 3
+1: LA 0 0
+2: LC 3
+3: SI
+
+4: LA 0 1
+5: LC 4
+6: SI
+
+7: LA 0 2
+
+8: LV 0 0
+9: LV 0 0
+10: MUL
+11: LV 0 1
+12: LV 0 1
+13: MUL
+14: ADD
+15: SI
+
+16: LV 0 2
+17: PUTI
+
+18: LC 10
+19: PUTC
+20: EXIT
