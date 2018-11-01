@@ -1,0 +1,30 @@
+package SVM;
+import java.util.Random;
+
+public class Random_ {
+
+	int r2, c1=0, c2=0;
+	long seed;
+	Random r;
+
+	Random_() {
+		long seed = System.currentTimeMillis();
+		r = new Random(seed);
+	}
+
+	boolean make() {
+		r2 = r.nextInt(9);
+		if(c1==90) r2=9;
+		if(c2==10) r2=0;
+
+		if(r2<8) {
+			c1++;
+			return true;
+		}
+		else {
+			c2++;
+			return false;
+		}
+	}
+
+}

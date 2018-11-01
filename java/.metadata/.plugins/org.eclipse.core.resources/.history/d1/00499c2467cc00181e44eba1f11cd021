@@ -1,0 +1,84 @@
+package SVM;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+public class data_format {
+
+	public static void main(String[] args) throws Exception {
+		String inputFileName = "C:\\java\\領域_SVM\\iris.data.kwansei.txt";
+		String outputFileName1 = "C:\\java\\領域_SVM\\example_train.txt";
+		String outputFileName2 = "C:\\java\\領域_SVM\\example_predict.txt";
+
+
+		BufferedReader br = new BufferedReader(new FileReader(inputFileName));
+		BufferedWriter bw1 = new BufferedWriter(new FileWriter(outputFileName1));
+		BufferedWriter bw2 = new BufferedWriter(new FileWriter(outputFileName2));
+
+		String buffer;
+		String[] buffer_s = new String[100];
+		Random_ r = new Random_();
+
+		while((buffer=br.readLine())!=null) {
+			buffer_s = buffer.split(",", 0);
+
+			if(r.R_make()) /* 訓練用ファイル作成 */ {
+				if(buffer_s[4].equals("Iris-setosa")) bw1.write("+1 ");
+				else bw1.write("-1 ");
+
+				for(int i=0; i<buffer_s.length-1; i++)
+					bw1.write(i+1 + ":" + buffer_s[i] + " ");
+
+				bw1.write("\n");
+			}
+
+			else /* チェック用ファイル作成 */ {
+				if(buffer_s[4].equals("Iris-setosa")) bw2.write("+1 ");
+				else bw2.write("-1 ");
+
+				for(int i=0; i<buffer_s.length-1; i++)
+					bw2.write(i+1 + ":" + buffer_s[i] + " ");
+
+				bw2.write("\n");
+			}
+		}
+
+		br.close();
+		bw1.close();
+		bw2.close();
+
+		String[] command_t = {"./svm-train", "example_train.txt", "modelFile"};
+		String[] command_p = {"./svm-predict", "example=predict.txt", "modelFile", "output.txt"};
+		File dir = new File("C:\\java\\領域_SVM");
+		Process p1=null , p2=null;
+		Runtime rt = Runtime.getRuntime();
+
+		try {
+            p1 = rt.exec(command_t, null, dir);
+            p2 = rt.exec(command_p, null, dir);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            p1.waitFor();
+            p2.waitFor();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        InputStream is1 = p1.getInputStream();
+        InputStream is2 = p2.getInputStream();
+        BufferedReader br1 = new BufferedReader(new InputStreamReader(is1));
+        BufferedReader br2 = new BufferedReader(new InputStreamReader(is2));
+
+	}
+
+}
+
+

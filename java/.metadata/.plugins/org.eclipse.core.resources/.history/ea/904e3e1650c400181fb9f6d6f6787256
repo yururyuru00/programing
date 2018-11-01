@@ -1,0 +1,17 @@
+package practice2;
+
+public class R2_3_2 {
+
+	public static void main(String[] args) {
+		int i, c;
+		String seq = "1, 2, 3, 4, 5";
+		for(i=0; i<5; i++) {
+			if(( c=indexOf(",") )!=-1) {
+				if(i==4) System.out.println(seq[c+2]);
+				else ;
+			}
+			else break;
+		}
+	}
+
+}

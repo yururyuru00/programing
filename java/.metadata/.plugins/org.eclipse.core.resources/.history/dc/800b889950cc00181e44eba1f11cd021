@@ -1,0 +1,34 @@
+package SVM;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+
+public class Runtime_test {
+
+	public static void main(String[] args) {
+		// TODO 自動生成されたメソッド・スタブ
+		Process p = null;
+		 try {
+	            Runtime runtime = Runtime.getRuntime();
+	            p = runtime.exec("ls");
+	        } catch (IOException ex) {
+	        }
+		 InputStream is = p.getInputStream();
+
+		 BufferedReader br
+		    = new BufferedReader(
+		    new InputStreamReader(is));
+
+		StringBuilder sb = new StringBuilder();
+
+		String line;
+
+
+
+		System.out.println(sb.toString());
+
+	}
+
+}

@@ -1,0 +1,42 @@
+package Decision_tree;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class ReadFile {
+	BufferedReader br;
+
+	ReadFile(BufferedReader br) {
+		this.br = br;
+	}
+
+	void reader() {
+		int i, j,  k;
+		String buffer; String[] buffer_s;
+		buffer = br.readLine();
+		buffer_s = buffer.split(",");
+		int kind = buffer_s.length-1;
+		List<HashMap<String, Integer>> lm = new ArrayList<HashMap<String, Integer>>();
+		for(int i=0; i<kind; i++) lm.add(new HashMap<String, Integer>());
+		for()
+	}
+
+}
+
+
+
+ReadWrite(BufferedReader br) {
+	this.br = br;
+}
+
+List<List<Integer>> read() throws IOException {
+	String[] buffer_s;
+	buffer_s = br.readLine().split(",");
+	guestSize = Integer.parseInt(buffer_s[0]); //
+	itemSize = Integer.parseInt(buffer_s[1]);
+	i=0; j=0; k=0; List<List<Integer>> ll = new ArrayList<>();
+
+	for(i=0; i<guestSize; i++) { //ここですべての買

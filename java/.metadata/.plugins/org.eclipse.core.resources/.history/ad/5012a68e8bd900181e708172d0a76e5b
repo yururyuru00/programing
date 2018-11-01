@@ -1,0 +1,37 @@
+package pattern_maining;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Pattern_Maining {
+
+	public static void main(String[] args) throws IOException {
+		String dirStr = "C:\\java\\Pattern_Maining";
+		String separator="\\";
+		String inputFileName = "sample_in.txt";
+		String outPutFileName = "sample_in.txt";
+		BufferedReader br = new BufferedReader(new FileReader(dirStr + separator+inputFileName));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(dirStr + separator+outPutFileName));
+
+		ReadWrite rw = new ReadWrite(br); //読み書きクラス
+		List<List<Integer>> ll = rw.read();
+		Mine m = new Mine();
+
+		List<Integer> l = new ArrayList<Integer>();
+		List<Integer> l2 = new ArrayList<Integer>(); l2.add(1); l2.add(3);
+
+		m.mine(l, ll, Integer.parseInt(args[0]));
+		HashMap<List<Integer>,Integer> sup = m.returnSup();
+
+		for(List<Integer> key : sup.keySet())
+			System.out.println(key + " " + sup.get(key) + "回");
+
+		rw.write(ll);
+
+		br.close();
+		bw.close();
+	}
+}

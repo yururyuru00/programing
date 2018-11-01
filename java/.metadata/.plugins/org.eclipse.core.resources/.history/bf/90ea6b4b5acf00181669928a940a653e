@@ -1,0 +1,36 @@
+package SVM;
+import java.io.BufferedWriter;
+import java.io.IOException;
+
+public class Writer {
+	BufferedWriter bw1;
+	BufferedWriter bw2;
+
+	Writer(BufferedWriter bw1, BufferedWriter bw2) {
+		this.bw1 = bw1;
+		this.bw2 = bw2;
+	}
+
+	void write(boolean flag, String buffer) throws IOException {
+		String[] buffer_s = buffer.split(",", 0);
+
+		if(flag) {
+			if(buffer_s[4].equals("Iris-setosa")) bw1.write("+1 ");
+			else bw1.write("-1 ");
+
+			for(int i=0; i<buffer_s.length-1; i++)
+				bw1.write(i+1 + ":" + buffer_s[i] + " ");
+			bw1.write("\n");
+		}
+		else {
+			if(buffer_s[4].equals("Iris-setosa")) bw2.write("+1 ");
+			else bw2.write("-1 ");
+
+			for(int i=0; i<buffer_s.length-1; i++)
+				bw2.write(i+1 + ":" + buffer_s[i] + " ");
+			bw2.write("\n");
+
+		}
+
+	}
+}

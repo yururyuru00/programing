@@ -1,0 +1,71 @@
+package pattern_maining;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+public class Mine {
+	int i, count, itemSize;
+	HashMap<List<Integer>, Integer> sup = new HashMap<List<Integer>, Integer>();
+
+	Mine()  {
+		i=0; count=0;
+		itemSize = ReadWrite.itemSize;
+	}
+
+	int Max(List<Integer> l) {
+		if(l.size()==0) return 0;
+		else return l.get(l.size()-1);
+	}
+
+	void mine(List<Integer> l, List<List<Integer>> ll, int limit) {
+		System.out.println(l);
+		//i=l.get(l.size()-1);
+		for(int i=this.Max(l)+1; i<=itemSize; i++) { //iが原因かも
+			System.out.print(i + " "); System.out.println();
+			Iterator<List<Integer>> it = ll.iterator();
+			List<Integer> l2 = new ArrayList<Integer>();
+			l2.addAll(l); l2.add(i);
+			count=0;
+			while(it.hasNext()) {if(search(l2, it.next())==true) count++;}
+			if(count>=limit) {
+				sup.put(l2, count);
+				this.mine(l2, ll, limit);
+			}
+		}
+		//i=l.get(l.size()-1);
+		//l.remove(i);
+		System.out.println("*" + l + " " + i);
+	}
+
+	HashMap<List<Integer>,Integer> returnSup () {return sup;}
+
+	static boolean search(List<Integer> l1, List<Integer> l2) {
+		Iterator<Integer> it1 = l1.iterator();
+		Iterator<Integer> it2 = l2.iterator();
+		boolean flag = true;
+		Integer a; int counter=0;
+
+		while(it1.hasNext()) {
+			a = it1.next();
+			while(it2.hasNext()) {
+				if(a == it2.next()) {
+					counter++;
+					break;
+				}
+			}
+		}
+		if(counter!=l1.size()) flag = false;
+
+		return flag;
+	}
+
+	static String l2s (List<Integer> l){
+		String s = "";
+
+		Iterator<Integer> it = l.iterator();
+		while(it.hasNext()) s += it.next();
+		return s;
+	}
+}

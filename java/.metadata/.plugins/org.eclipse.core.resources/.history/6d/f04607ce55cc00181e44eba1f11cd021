@@ -1,0 +1,42 @@
+package SVM;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+public class Runtime_test {
+
+    public static void main(String[] args) throws IOException {
+        Runtime runtime = Runtime.getRuntime();
+        String analysisFilePath = "C:/java"; // mecabで形態素解析したいtxtファイルを指定
+
+        String[] Command = { "cmd", "/c", "notepad.exe " }; // cmd.exeでmecab.exeを起動し指定したファイル(filePath)を形態素解析する
+
+        Process p = null;
+        File dir = new File("C:/Program Files (x86)/MeCab/bin");// 実行ディレクトリの指定
+        try {
+            p = runtime.exec(Command, null, dir); // 実行ディレクトリ(dir)でCommand(mecab.exe)を実行する
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            p.waitFor(); // プロセスの正常終了まで待機させる
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        InputStream is = p.getInputStream(); // プロセスの結果を変数に格納する
+        BufferedReader br = new BufferedReader(new InputStreamReader(is)); // テキスト読み込みを行えるようにする
+
+        while (true) {
+            String line = br.readLine();
+            if (line == null) {
+                break; // 全ての行を読み切ったら抜ける
+            } else {
+                System.out.println("line : " + line); // 実行結果を表示
+            }
+        }
+    }
+}

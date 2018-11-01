@@ -1,0 +1,21 @@
+package pattern_maining;
+
+import java.io.BufferedWriter;
+
+public class SampleMaker {
+	BufferedWriter bw;
+
+	SampleMaker(BufferedWriter bw) {
+		bw = this.bw;
+	}
+
+	void Make(int guestSize, int itemSize) {
+		int i, j;
+
+		for(i=0; i<guestSize; i++) {
+			for(j=0; j<itemSize; j++) {
+
+			}
+		}
+	}
+}

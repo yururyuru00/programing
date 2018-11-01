@@ -1,0 +1,30 @@
+package Decision_tree;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
+public class MainClass {
+
+	public static void main(String[] args) throws IOException {
+
+		String dirStr = "C:\\java\\Decision_tree";
+		String separator="\\";
+		String inputFileName = "sample_in.txt";
+		BufferedReader br = new BufferedReader(new FileReader(dirStr + separator+inputFileName));
+
+		ReadFile rf = new ReadFile(br);
+		List<HashMap<String, Integer>> lm = rf.reader();
+
+		for(int i=0; i<lm.size(); i++) {
+			System.out.println(i);
+			for(String factor : lm.get(i).keySet()) System.out.print(lm.get(i).get(factor) + " ");
+			System.out.println();
+		}
+
+		br.close();
+	}
+
+}

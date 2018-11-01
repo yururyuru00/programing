@@ -1,0 +1,38 @@
+package pattern_maining;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class A {
+	static int i=0;
+	A() {i++;}
+	int returnInt() {return i;}
+}
+
+public class Test {
+
+	public static void main(String[] args) {
+		int i, j;
+
+		List<List<Integer>> ll = new ArrayList<>();
+
+		for(i=0; i<10; i++) {
+			ll.add(i, new ArrayList<Integer>());
+			List<Integer> l = ll.get(i);
+			for(j=0; j<i+10; j++) l.add(j);
+		}
+
+		List<Integer> l1 = new ArrayList<Integer>();
+		List<Integer> l2 = new ArrayList<Integer>();
+
+		l1.addAll(ll.get(0));
+		l1.add(10);
+
+		System.out.println(ll.get(0));
+		System.out.println(l1);
+
+	}
+
+}
+
+

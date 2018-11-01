@@ -1,0 +1,68 @@
+package pattern_maining;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+class A {
+	static int i=0;
+	A() {i++;}
+	int returnInt() {return i;}
+}
+
+public class Test {
+
+	public static void main(String[] args) {
+		int i=0, j;
+
+		List<List<Integer>> ll = new ArrayList<>();
+		List<Integer> l = new ArrayList<>();
+		roop(l, i);
+
+
+	}
+
+	static void roop(List<Integer> l, int i) {
+		l.add(i); i++;
+		if(i<10) roop(l, i);
+	}
+
+	static void mine(List<Integer> l, List<List<Integer>> ll, int limit) {
+		System.out.println(l);
+		for(i=this.Max(l)+1; i<=itemSize; i++) {
+			System.out.print(i + " "); System.out.println();
+			Iterator<List<Integer>> it = ll.iterator();
+			List<Integer> l2 = new ArrayList<Integer>();
+			l2.addAll(l); l2.add(i);
+			int count=0;
+			while(it.hasNext()) {if(search(l2, it.next())==true) count++;}
+			if(count>=limit) {
+				//sup.put(l2, count);
+				this.mine(l2, ll, limit);
+			}
+		}
+	}
+
+	static boolean search(List<Integer> l1, List<Integer> l2) {
+		Iterator<Integer> it1 = l1.iterator();
+		Iterator<Integer> it2 = l2.iterator();
+		boolean flag = true;
+		Integer a; int counter=0;
+
+
+		while(it1.hasNext()) {
+			a = it1.next();
+			while(it2.hasNext()) {
+				if(a == it2.next()) {
+					counter++;
+					break;
+				}
+			}
+		}
+		if(counter!=l1.size()) flag = false;
+
+		return flag;
+	}
+}
+
+

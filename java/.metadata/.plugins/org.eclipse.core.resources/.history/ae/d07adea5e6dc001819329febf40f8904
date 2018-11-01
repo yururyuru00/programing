@@ -1,0 +1,19 @@
+package Decision_tree;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+public class MainClass {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		
+		String dirStr = "C:\\java\\Decision_tree";
+		String separator="\\";
+		String inputFileName = "sample_in.txt";
+		BufferedReader br = new BufferedReader(new FileReader(dirStr + separator+inputFileName));
+		
+		
+	}
+
+}

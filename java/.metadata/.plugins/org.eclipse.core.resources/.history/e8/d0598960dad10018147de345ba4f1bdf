@@ -1,0 +1,14 @@
+package cls;
+
+public class Distance {
+
+	Distance() {
+		double[] x;
+		double[] y;
+	}
+
+	double calc(double[] a, double[] b) {
+		x = a; y = b;
+
+	}
+}

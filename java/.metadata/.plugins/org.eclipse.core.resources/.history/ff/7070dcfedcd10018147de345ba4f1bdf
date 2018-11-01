@@ -1,0 +1,61 @@
+package cls;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Clustering {
+
+	public static void main(String[] args) throws IOException {
+		// TODO 自動生成されたメソッド・スタブ
+		String dirStr = "C:\\java\\SVM";
+		String separator="\\";
+		String inputFileName = "iris.data.kwansei.txt";
+		String outputFileName1 = "example_train.txt";
+		String outputFileName2 = "example_predict.txt";
+
+		BufferedReader br = new BufferedReader(new FileReader(dirStr + separator+inputFileName));
+		BufferedWriter bw1 = new BufferedWriter(new FileWriter(dirStr + separator+outputFileName1));
+		BufferedWriter bw2 = new BufferedWriter(new FileWriter(dirStr + separator+outputFileName2));
+
+		String buffer;
+		String[] buffer_s;
+
+		int i=0, j;
+		double[][] c = new double[100][5];
+
+		while ((buffer = br.readLine()) != null) {
+			buffer_s = buffer.split(",");
+
+			c[i][0] = i;
+			for(j=0; j<4; j++) c[i][j+1] = Double.parseDouble(buffer_s[j]);
+			i++;
+		}
+
+		Distance dis = new Distance(); //ユークリッド距離計算クラス
+		double[][] dist = new double[100][100]; //すべての二点間の距離
+		double min = 100000;
+		//各２点間の計算
+		for(i=1; i<100; i++) {
+			for(j=i+1; j<101; j++) {
+				dist[i][j] = dis.calc(c[i-1], c[j-1]);
+				dist[j][i] = dist[i][j];
+			}
+			dist[i][i] = 0;
+		}
+
+
+		br.close();
+		bw1.close();
+		bw2.close();
+
+		for(i=1; i<11; i++) {
+			System.out.print(i + " ");
+			for(j=1; j<11; j++) System.out.printf("%.1f ", dist[i][j]);
+			System.out.println();
+		}
+	}
+
+}

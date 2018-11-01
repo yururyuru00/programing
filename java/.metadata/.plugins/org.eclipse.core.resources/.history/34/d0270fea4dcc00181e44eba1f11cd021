@@ -1,0 +1,15 @@
+package SVM;
+import java.io.IOException;
+
+public class Runtime_test {
+
+	public static void main(String[] args) {
+		// TODO 自動生成されたメソッド・スタブ
+		 try {
+	            Runtime runtime = Runtime.getRuntime();
+	            Process p = runtime.exec("ls");
+	        } catch (IOException ex) {
+	        }
+	}
+
+}

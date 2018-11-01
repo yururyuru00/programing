@@ -1,0 +1,86 @@
+package pattern_maining;
+
+import java.util.ArrayList;
+//import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+public class Mine {
+	//int i;
+	//int count; inokuchi 変数のスコープは短いほうが，読み手にとって望ましい．
+	int itemSize;
+	//HashMap<List<Integer>, Integer> sup = new HashMap<List<Integer>, Integer>();
+
+	Mine(int itemSize) {
+		//count = 0;
+		this.itemSize = itemSize;
+	}
+
+	void mine(List<Integer> l, List<List<Integer>> ll, int limit) {
+		
+		
+		for (int i = Max(l) + 1; i <= itemSize; i++) {
+			List<Integer> l2 = new ArrayList<Integer>();
+			l2.addAll(l);
+			l2.add(i);
+			int count = 0;
+			for (List<Integer> transaction : ll) {//inokuchi こんな書き方もできます．iteratorを使わないことで1行短くなりました．
+				if (search(l2, transaction)) //inokluchi ==trueはなくてもよい．むしろないほうがよい．
+					count++;
+			} // 各買い物籠リストに対して含まれるか判定
+			if (count >= limit) {
+				System.out.println(l2 + " " + count + "回");
+				//sup.put(l2, count); // 閾値より支持度が高ければ、リストに追加
+				this.mine(l2, ll, limit); // ここで再帰処理
+			}
+		}
+	}
+
+	/*HashMap<List<Integer>, Integer> returnSup() {
+		return sup;
+	}*/
+
+	//static inokuchi static 不要 
+	int Max(List<Integer> l) { // リスト内の最大値を返す
+		if (l.size() == 0)
+			return 0;
+		else
+			return l.get(l.size() - 1);
+	}
+
+	//static 
+	boolean search(List<Integer> l1, List<Integer> l2) { // 包含関係にあるかを判定
+				
+		Iterator<Integer> it1 = l1.iterator();
+		Iterator<Integer> it2 = l2.iterator();
+
+		while (it1.hasNext()) {
+			boolean notFind = true;
+			int a = it1.next();
+			while (it2.hasNext()) {
+				if (a == it2.next()) {
+					notFind=false;
+					break;
+				}
+			}
+			if(notFind)//inokuchi l1の１つの要素が見つからない時点で，falseを返すことができる
+				return false;
+		}
+		return true;
+	}
+	
+
+	boolean search2(List<Integer> l1, List<Integer> l2) { // 包含関係にあるかを判定
+		
+		//inokuchi このように，プログラムの長さを短くできます．ただ，listがソートされていることを前提にしたら，searchのように動作効率の良いプログラムを書くことができます．
+		//l1,l2の長さをそれぞれ|l1|, |l2|とすると，このメソッドの計算時間はO(|l1||l2|)かかりますが，
+		//矢嶋版searchはO(|l1|+|l2|)ですみます．
+		for(Integer item : l1){ 
+			if(!l2.contains(item))
+				return false;
+		}
+		return true;
+		
+	}
+
+}
